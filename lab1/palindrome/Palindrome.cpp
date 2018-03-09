@@ -7,5 +7,11 @@
 
 bool is_palindrome(std::string str)
 {
-    return 0;
+    std::string koncowy;
+    for(size_t i=str.size(); i>0; i--)
+    {
+        koncowy+=str[i-1];
+    }
+    return koncowy==str;
+
 }
