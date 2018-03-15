@@ -11,7 +11,7 @@ uint64_t DoubleBasePalindromes(int max_vaule_exculsive)
     uint64_t x=0;
     for(int j=1; j<max_vaule_exculsive+1 ;j++)
     {
-        int liczba=j;
+        int liczba=j;       // kopie j potrzebne do petli
         int liczba2=j;
         int liczba3=j;
         int liczbaodwrocona=0;
