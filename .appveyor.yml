@@ -31,3 +31,4 @@ build_script:
   - dir tests
   - dir tests\exampletest
   - tests\exampletest\example_examplelibrary_tests.exe
+
