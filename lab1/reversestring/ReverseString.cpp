@@ -6,7 +6,7 @@
 #include "ReverseString.h"
 
 
-std::string reverse(std::string str)
+std::string ReverseString(std::string str)
 {
     std::string koncowy;
     for(size_t i=str.size(); i>0; i--)

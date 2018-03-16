@@ -18,7 +18,7 @@ TEST_P(ReverseStringDataDrivenTests, ReverseStringShouldReturnExpectedResult) {
   const TestParam &p = GetParam();
   auto expected = p.second;
   auto arg = p.first;
-  EXPECT_EQ(expected, reverse(arg)) << "Did call reverse(" << arg << ")\n";
+  EXPECT_EQ(expected, ReverseString(arg)) << "Did call ReverseString(" << arg << ")\n";
 }
 
 std::vector<TestParam> reverseTestData{{"", ""}, {"abc", "cba"}, {"g", "g"}, {"8h", "h8"},

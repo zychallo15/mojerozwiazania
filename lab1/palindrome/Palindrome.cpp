@@ -5,7 +5,7 @@
 #include "Palindrome.h"
 #include <string>
 
-bool is_palindrome(std::string str)
+bool IsPalindrome(std::string str)
 {
     std::string koncowy;
     for(size_t i=str.size(); i>0; i--)
