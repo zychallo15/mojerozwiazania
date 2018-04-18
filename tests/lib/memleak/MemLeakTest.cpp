@@ -26,7 +26,7 @@ MemLeakTest::~MemLeakTest() {
     message = ss.str();
   }
   MemLeak::Instance().ClearState();
- EXPECT_TRUE(verification) << message;
+  EXPECT_TRUE(verification) << message;
 }
 
 void MemLeakTest::StopRecording() {
