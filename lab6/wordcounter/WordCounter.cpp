@@ -10,6 +10,7 @@
 #include <algorithm>
 #include <set>
 #include <cctype>
+#include <vector>
 #include "WordCounter.h"
 
 
