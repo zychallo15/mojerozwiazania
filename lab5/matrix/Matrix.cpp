@@ -20,7 +20,7 @@ Matrix::Matrix(size_t x, size_t y)
 {
     rows=x;
     columns=y;
-    for(auto i=0; i<x*y;i++)
+    for(unsigned int i=0; i<x*y;i++)
     {
         v_.emplace_back(0.0,0.0);
     }
@@ -76,7 +76,7 @@ std::string Matrix::Print() const
 
     std::stringstream bufor;
     std::string zwrot;
-    int y=0;
+    unsigned int y=0;
     for(auto v: v_)
     {
         bufor<< v;
@@ -94,9 +94,8 @@ std::string Matrix::Print() const
 
     }
     zwrot[0]='[';
-    int m=0;
 
-    for(int x=2; x<zwrot.size(); x++)
+    for(unsigned int x=2; x<zwrot.size(); x++)
     {
         auto znak=zwrot[x];
         if(y==columns)
@@ -129,7 +128,7 @@ Matrix Matrix::Add(const Matrix &wzor) const
     }
     else
     {
-       for(int i=0; i<v_.size() ;i++)
+       for(unsigned int i=0; i<v_.size() ;i++)
        {
            m3.v_.push_back(v_[i]+wzor.v_[i]);
 
@@ -151,7 +150,7 @@ Matrix Matrix::Sub(const Matrix &wzor)
     }
     else
     {
-        for(int i=0; i<v_.size() ;i++)
+        for(unsigned int i=0; i<v_.size() ;i++)
         {
             m3.v_.push_back(v_[i]-wzor.v_[i]);
 
@@ -175,7 +174,7 @@ Matrix Matrix::Mul(const Matrix &wzor)
     else
     {
         std::complex<double> **A,**B,**C,s;
-        int i,j,k;
+        unsigned int i,j,k;
 
         // odczytujemy wymiary macierzy
 
@@ -261,7 +260,7 @@ Matrix Matrix::Pow(int x)
     {
         if(x==0)
         {
-            for(int j=0; j<columns*rows;j++)
+            for(unsigned int j=0; j<columns*rows;j++)
             {
                 if(j%(rows+1)==0) m3.v_.emplace_back(1.);
                 else m3.v_.emplace_back(0);
@@ -278,7 +277,7 @@ Matrix Matrix::Pow(int x)
             for(int i=0; i<x-1;i++)
             {
                 std::complex<double> **A,**B,**C,s;
-                int m,j,k;
+                unsigned int m,j,k;
 
                 // odczytujemy wymiary macierzy
 

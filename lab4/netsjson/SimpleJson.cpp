@@ -69,10 +69,6 @@ JsonValue::JsonValue(std::vector<JsonValue> x)
 JsonValue::JsonValue(std::map<std::string, JsonValue> x)
 {
     mapa=new std::map<std::string, JsonValue>;
-    /*for (std::pair<std::string, JsonValue> element : x)
-    {
-        mapa->emplace(element.first,element.second);
-    }*/
     *mapa=x;
     liczba_calk=nullptr;
     liczba_przec= nullptr;
