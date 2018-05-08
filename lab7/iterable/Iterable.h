@@ -66,8 +66,6 @@ namespace utility
     private:
         ZipperIterator first;
         ZipperIterator last;
-        std::vector<int> v_int_;
-        std::vector<std::string> v_string_;
     };
 
 }

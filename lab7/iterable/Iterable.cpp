@@ -8,9 +8,7 @@
 using namespace utility;
 
 // ZipperIterator
-ZipperIterator::ZipperIterator(){
-    ;
-}
+
 
 ZipperIterator::ZipperIterator(std::vector<int>::const_iterator left_begin,
 std::vector<std::string>::const_iterator right_begin,
@@ -32,7 +30,7 @@ std::pair<int, std::string> ZipperIterator::Dereference() const{
 
 
 IterableIterator & ZipperIterator::Next(){
-    if(left_now_<=left_end_ && right_now_<=right_end_)
+    if(left_now_!=left_end_ && right_now_=right_end_)
     {
         ++left_now_;
         ++right_now_;
@@ -90,14 +88,8 @@ IterableIteratorWrapper Iterable::end() const{
 
 // Zipper
 Zipper::Zipper(std::vector<int> vi,std::vector<std::string> vs)
-{
-
-    first.left_now_= vi.begin();
-    first.right_now_=vs.begin();
-
-    last.left_end_= vi.end();
-    last.right_end_=vs.end();
-
+        : first(vi.begin(),vs.begin(),vi.end(),vs.end()),
+          last(vi.end(),vs.end(),vi.end(),vs.end()) {
 }
 std::unique_ptr<IterableIterator> Zipper::ConstBegin() const
 {
@@ -106,6 +98,6 @@ std::unique_ptr<IterableIterator> Zipper::ConstBegin() const
 }
 std::unique_ptr<IterableIterator> Zipper::ConstEnd() const
 {
-    std::unique_ptr<IterableIterator> x=std::make_unique<ZipperIterator>(first);
+    std::unique_ptr<IterableIterator> x=std::make_unique<ZipperIterator>(last);
     return x;
 }
