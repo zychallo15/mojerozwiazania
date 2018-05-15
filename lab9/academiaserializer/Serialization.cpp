@@ -8,6 +8,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <functional>
+#include <experimental/optional>
 #include "Serialization.h"
 
 //klasa Serialize
@@ -54,16 +55,45 @@ std::string academia::Room::EnumToString(academia::Room::Type x) {
 
 // klasa building
 
-academia::Building::Building(int x,std::string napis,std::vector<std::reference_wrapper<const academia::Serializable>> vector)
+/*academia::Building::Building(int x,std::string napis,const std::vector<std::reference_wrapper<const academia::Serializable>> &vector)
 {
     id=x;
     name=move(napis);
-    v_=move(vector);
+    v_=vector;
+
+}*/
+
+/*
+
+
+ */
+
+
+academia::Building::Building(int x,std::string napis,const std::vector<academia::Room> & vector)
+{
+    id=x;
+    name=move(napis);
+    vector_=move(vector);
+
+
 
 }
 
+int academia::Building::Id() const {
+    return id;
+}
+
+
+
 void academia::Building::Serialize(academia::Serializer *serializer) const
 {
+
+    std::vector<std::reference_wrapper<const Serializable>> v_;
+    for(auto & v: vector_)
+    {
+        v_.emplace_back(std::cref(v));
+    }
+
     serializer->Header("building");
     serializer->IntegerField("id",id);
     serializer->StringField("name",name);
@@ -73,6 +103,12 @@ void academia::Building::Serialize(academia::Serializer *serializer) const
 
 void academia::Building::Serialize(academia::Serializer *serializer)
 {
+    std::vector<std::reference_wrapper<const Serializable>> v_;
+    for(auto const & v: vector_)
+    {
+        v_.emplace_back(std::cref<Serializable>(v));
+    }
+
     serializer->Header("building");
     serializer->IntegerField("id",id);
     serializer->StringField("name",name);
@@ -219,4 +255,49 @@ void academia::JsonSerializer::Footer(const std::string &object_name)
 
     *out_<< "}";
 }
+
+
+
+// klasa Buildingrepository
+
+academia::BuildingRepository::BuildingRepository(std::initializer_list<Building> init){
+    build_=init;
+}
+
+void academia::BuildingRepository::StoreAll(Serializer *serializer) const{
+    std::vector<std::reference_wrapper<const Serializable>> v_;
+    for(auto const & v: build_)
+    {
+        v_.emplace_back(std::cref<Serializable>(v));
+    }
+    serializer->Header("building_repository");
+    serializer->ArrayField("buildings",v_);
+    serializer->Footer("building_repository");
+}
+
+
+
+
+
+
+void academia::BuildingRepository::Add(const academia::Building & build){
+
+    build_.emplace_back(build);
+
+}
+
+
+
+
+
+std::experimental::optional<academia::Building> academia::BuildingRepository::operator[](int wartosc) const{
+    for(auto &v: build_)
+    {
+        if(wartosc==v.Id())
+        {
+            return v;
+        }
+    }
+}
+
 

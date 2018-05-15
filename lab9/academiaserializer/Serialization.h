@@ -11,6 +11,7 @@
 #include <sstream>
 #include <stdexcept>
 #include <functional>
+#include <experimental/optional>
 
 
 namespace academia
@@ -63,14 +64,17 @@ namespace academia
 
     class Building: public Serializable{
     public:
-        Building(int x,std::string napis,std::vector<std::reference_wrapper<const academia::Serializable>> vector);
+        //Building(int x,std::string napis,const std::vector<std::reference_wrapper<const academia::Serializable>> &vector);
+        Building(int x,std::string napis,const std::vector<academia::Room> &vector);
         void Serialize(academia::Serializer *serializer) const override;
         void Serialize(academia::Serializer *serializer) override;
+        int Id() const;
 
     private:
         int id;
         std::string name;
-        std::vector<std::reference_wrapper<const Serializable>> v_;
+        //std::vector<std::reference_wrapper<const Serializable>> v_;
+        std::vector<Room> vector_;
 
     };
 
@@ -105,6 +109,19 @@ namespace academia
         void Footer(const std::string &object_name) final;
     private:
         bool IfitEnum(const std::string &name);
+    };
+
+
+
+    class BuildingRepository{
+    public:
+        BuildingRepository(std::initializer_list<Building> init);
+        void StoreAll(Serializer *serializer) const;
+        void Add(const Building & build);
+        std::experimental::optional<Building> operator[](int wartosc) const;
+
+    private:
+        std::vector<Building> build_;
     };
 }
 
