@@ -322,7 +322,7 @@ TEST_F(ScheduleTest, SchedulerCreatesScheduleOfSingleCourseWithSeveralGroupsButS
 
 TEST_F(ScheduleTest, SchedulerCreatesScheduleOfSingleCourseWithSeveralGroups) {
   unique_ptr<Scheduler> scheduler = make_unique<GreedyScheduler>();
-
+    
   vector<int> rooms{1000};
   map<int, vector<int>> teachers{make_pair(100, vector<int>{10, 10, 10}), make_pair(200, vector<int>{10, 10})};
   map<int, set<int>> years{make_pair(1, set<int>{10})};
