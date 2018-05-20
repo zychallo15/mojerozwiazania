@@ -126,6 +126,7 @@ namespace academia{
                 else
                 {
                     room_iterator++;
+                    if(room_iterator == rooms.size()) throw NoViableSolutionFound();
                     room=rooms[room_iterator];
                     time=0;
                 }
