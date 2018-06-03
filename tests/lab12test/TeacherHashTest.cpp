@@ -121,4 +121,3 @@ TEST_F(TeacherHashTest, CanInsertTeachersAsKeysIntoUnorderedMap) {
   EXPECT_EQ(98, m[s3]);
 }
 
-
