@@ -72,7 +72,7 @@ TEST_F(TimeRecorderTest, CanCallTimeRecorderWithGlobalIntFunctionPointer) {
   EXPECT_GT(record.second, 0);
 }
 
-TEST_F(TimeRecorderTest, CanCallTimeRecorderWithGlobalStringFunctionPointr) {
+TEST_F(TimeRecorderTest, CanCallTimeRecorderWithGlobalStringFunctionPointer) {
   std::pair<std::string, double> record = TimeRecorder(TestStringFunction);
   EXPECT_EQ("test"s, record.first);
   //execution time between 0 and 10 ms
